@@ -1,0 +1,80 @@
+# Sign Up Form
+
+```elixir
+Mix.install([
+  {:youtube, github: "brooklinjazz/youtube"},
+  {:hidden_cell, github: "brooklinjazz/hidden_cell"}
+])
+```
+
+## Navigation
+
+[Return Home](../start.livemd)<span style="padding: 0 30px"></span>
+[Report An Issue](https://github.com/DockYard-Academy/beta_curriculum/issues/new?assignees=&labels=&template=issue.md&title=)
+
+## Sign Up Form
+
+It's common for applications to have a sign up form that validates a user's email, password, and other information.
+
+Create a `User` module which validates user's information.
+
+<!-- livebook:{"force_markdown":true} -->
+
+```elixir
+{:ok, user} =
+  User.new(%{
+    username: "Peter Parker",
+    password: "secret_spider",
+    email: "peter@spider.web",
+    terms_and_conditions: true
+  })
+```
+
+We're going to allow any string for the recipient name, domain name, and top level domain.
+
+* `username` (required) a 3-12 character string.
+* `password` (required) a 12-50 character string.
+* `email` (required) a string in the format `recipient_name@domain_name.top_level_domain`. i.e. `"peter@gmail.com"`.
+* `age` (optional) an integer.
+* `agreed_to_terms_and_conditions` (required) a boolean which must be `true`.
+
+You should rely on Ecto Changesets and your own custom validation to validate the user information.
+Enter your solution below.
+
+```elixir
+defmodule User do
+  use Ecto.Schema
+  import Ecto.Changeset
+
+  def changeset(%User{} = user, params) do
+  end
+
+  def new(params) do
+  end
+end
+```
+
+## Commit Your Progress
+
+Run the following in your command line from the curriculum folder to track and save your progress in a Git commit.
+Ensure that you do not already have undesired or unrelated changes by running `git status` or by checking the source control tab in Visual Studio Code.
+
+```
+$ git checkout main
+$ git checkout -b exercise-sign_up_form
+$ git add .
+$ git commit -m "finish sign up form exercise"
+$ git push origin exercise-sign_up_form
+```
+
+**DockYard Academy Students Only:**
+
+Create a pull request to your forked `main` branch and notify your teacher by including `@BrooklinJazz` in your PR description to get feedback.
+
+If you are interested in joining the next academy cohort, [sign up here](https://academy.dockyard.com/) to receive more news when it is available.
+
+## Up Next
+
+| Previous                                     | Next                                   |
+| -------------------------------------------- | -------------------------------------: |
+| [File Types](../exercises/file_types.livemd) | [HTML CSS](../reading/html_css.livemd) |

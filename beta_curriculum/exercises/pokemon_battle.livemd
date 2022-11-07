@@ -1,0 +1,194 @@
+# Pokemon Battle
+
+```elixir
+Mix.install([
+  {:youtube, github: "brooklinjazz/youtube"},
+  {:hidden_cell, github: "brooklinjazz/hidden_cell"}
+])
+```
+
+## Navigation
+
+[Return Home](../start.livemd)<span style="padding: 0 30px"></span>
+[Report An Issue](https://github.com/DockYard-Academy/beta_curriculum/issues/new?assignees=&labels=&template=issue.md&title=)
+
+## Overview
+
+You're going to create a pokemon battle game. If you're not familiar with pokemon, it's a game where elemental creatures battle.
+
+You're going to represent pokemon using a `Pokemon` struct with the keys `:name`, `:type`, `:health`, `:attack`, and `:speed`. Enforce that all keys must have a value.
+
+* `:name` is a string.
+* `:type` will be an atom of either `:grass`, `:water`, or `:fire`
+* `:health` will be an integer with a default value of `20`
+* `:attack` will be an integer with a default value of `5`
+* `:speed` will be an integer
+
+<div style="padding: 1rem; margin: 1rem 0; background-color: lightgreen; font-weight: bold;">
+You do not need to validate the data types for the keys above.
+These are simply the expected data types for each `Pokemon` struct instance.
+</div>
+
+<!-- livebook:{"force_markdown":true} -->
+
+```elixir
+%Pokemon{name: "Bulbasaur", type: :grass, health: 20, attack: 5, speed: 20}
+```
+
+Then implement the `Pokemon.attack/2` function according to the documented examples.
+
+<!-- livebook:{"force_markdown":true} -->
+
+```elixir
+attacker = %Pokemon{name: "Bulbasaur", type: :grass, health: 20, attack: 5, speed: 20}
+defender = %Pokemon{name: "Bulbasaur", type: :grass, health: 20, attack: 5, speed: 20}
+
+Pokemon.attack(attacker, defender)
+# output: subtract attack from health to return an updated pokemon struct
+%Pokemon{name: "Bulbasaur", type: :grass, health: 15, attack: 5, speed: 20}
+```
+
+`Pokemon.attack/2` should apply double damage if the pokemon has a type advantage, and half damage if the pokemon has a type disadvantage.
+
+The advantages are:
+
+* `:fire` is strong against `:grass`
+* `:grass` is strong against `:water`
+* `:water` is strong against `:fire`
+* `:fire` is weak against `:water`
+* `:grass` is weak against `:fire`
+* `:water` is weak against `:grass`
+* the same type should deal normal damage.
+
+<!-- livebook:{"force_markdown":true} -->
+
+```elixir
+attacker = %Pokemon{name: "Charmander", type: :fire, health: 20, attack: 5, speed: 20}
+defender = %Pokemon{name: "Bulbasaur", type: :grass, health: 20, attack: 5, speed: 20}
+
+Pokemon.attack(attacker, defender)
+# output: subtract attack (doubled) from health to return an updated pokemon struct
+%Pokemon{name: "Bulbasaur", type: :grass, health: 10, attack: 5, speed: 20}
+```
+
+```elixir
+defmodule Pokemon do
+  @moduledoc """
+  Pokemon
+
+  ## Examples
+
+    iex> %Pokemon{name: "Charmander", type: :fire, health: 20, attack: 5, speed: 20}
+    %Pokemon{name: "Charmander", type: :fire, health: 20, attack: 5, speed: 20}
+
+    iex> %Pokemon{name: "Charmander", type: :fire, speed: 20}
+    %Pokemon{name: "Charmander", type: :fire, health: 20, attack: 5, speed: 20}
+  """
+
+  @doc """
+  subtract the attack damage of an attacker from the defender's health.
+  return an updated pokemon struct, and take type advantage into consideration.
+
+  ## Examples
+
+    Same Type
+
+    iex> attacker = %Pokemon{name: "Charmander", type: :fire, health: 20, attack: 5, speed: 20}
+    iex> defender = %Pokemon{name: "Charmander", type: :fire, health: 20, attack: 5, speed: 20}
+    iex> Pokemon.attack(attacker, defender)
+    %Pokemon{name: "Charmander", type: :fire, health: 15, attack: 5, speed: 20}
+
+    Type Disadvantage
+
+    iex> attacker = %Pokemon{name: "Bulbasaur", type: :grass, health: 20, attack: 5, speed: 20}
+    iex> defender = %Pokemon{name: "Charmander", type: :fire, health: 20, attack: 5, speed: 20}
+    iex> Pokemon.attack(attacker, defender)
+    %Pokemon{name: "Charmander", type: :fire, health: 17.5, attack: 5, speed: 20}
+
+    Type Advantage
+
+    iex> attacker = %Pokemon{name: "Charmander", type: :fire, health: 20, attack: 5, speed: 20}
+    iex> defender = %Pokemon{name: "Bulbasaur", type: :grass, health: 20, attack: 5, speed: 20}
+    iex> Pokemon.attack(attacker, defender)
+    %Pokemon{name: "Charmander", type: :fire, health: 10, attack: 5, speed: 20}
+  """
+  def attack(attacker, defender) do
+  end
+end
+```
+
+### Pokemon Instances
+
+Bind three variables `charmander`, `bulbasaur`, and `squirtle` to an instance of a `Pokemon` struct with the following information.
+
+```mermaid
+classDiagram
+  class charmander {
+    name: "Charmander"
+    type: :fire
+    health: 20
+    attack: 5
+    speed: 20
+  }
+  class bulbasaur {
+    name: "Bulbasar"
+    type: :grass
+    health: 20
+    attack: 5
+    speed: 20
+  }
+  class squirtle {
+    name: "Squirtle"
+    type: :water
+    health: 20
+    attack: 5
+    speed: 20
+  }
+```
+
+Use may these three structs to test your `Pokemon.attack/2` function.
+
+<details style="background-color: lightgreen; padding: 1rem; margin: 1rem 0;">
+<summary>Example solution</summary>
+
+```elixir
+charmander = %Pokemon{name: "Charmander", type: :fire, health: 20, attack: 5, speed: 20}
+bulbasaur = %Pokemon{name: "Bulbasaur", type: :grass, health: 20, attack: 5, speed: 20}
+squirtle = %Pokemon{name: "Squirtle", type: :water, health: 20, attack: 5, speed: 20}
+
+# Testing Example
+Pokemon.attack(charmander, bulbasaur)
+```
+
+</details>
+
+Enter your solution below.
+
+```elixir
+
+```
+
+## Commit Your Progress
+
+Run the following in your command line from the curriculum folder to track and save your progress in a Git commit.
+Ensure that you do not already have undesired or unrelated changes by running `git status` or by checking the source control tab in Visual Studio Code.
+
+```
+$ git checkout main
+$ git checkout -b exercise-pokemon_battle
+$ git add .
+$ git commit -m "finish pokemon battle exercise"
+$ git push origin exercise-pokemon_battle
+```
+
+**DockYard Academy Students Only:**
+
+Create a pull request to your forked `main` branch and notify your teacher by including `@BrooklinJazz` in your PR description to get feedback.
+
+If you are interested in joining the next academy cohort, [sign up here](https://academy.dockyard.com/) to receive more news when it is available.
+
+## Up Next
+
+| Previous                                         | Next                               |
+| ------------------------------------------------ | ---------------------------------: |
+| [RPG Dialogue](../exercises/rpg_dialogue.livemd) | [Ranges](../reading/ranges.livemd) |
