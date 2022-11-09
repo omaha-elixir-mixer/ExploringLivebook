@@ -78,6 +78,7 @@ https://abby-jones-livebook.fly.dev
 * Smart Cells
 * Kino
 * VegaLite
+* MapLibre
 
 ---
 # Use Cases
@@ -100,39 +101,28 @@ The "Chat app" and "Multi-player Pong" tutorials highlight some of Livebook's po
 To demonstrate - I'll need a volunteer from the audience!
 
 ---
-# Use Case 1: Rapid Prototyping and Experimenting
-
-First meeting - Andrew live-coded a function in iex to count the number of times a word appeared in a string
-
-Here's what it looks like in Livebook, with TDD
-
-And with dbg to investigate along the way
-
-Also a great tool to have up while you're working through a book like _Elixir in Action_
-
----
-# Use Case 2: Teaching and Curriculum Delivery
+# Teaching and Curriculum Delivery
 
 Examples:
 
-* [Dockyard Academy](https://github.com/DockYard-Academy/beta_curriculum) - in beta
-* [Elixir Secure Coding Training](https://github.com/podium/elixir-secure-coding)
+* [Dockyard Academy](https://github.com/DockYard-Academy/beta_curriculum) - Open-source "bootcamp" curriculum
+* [Elixir Secure Coding Training](https://github.com/podium/elixir-secure-coding) - by Podium
 
 ---
-# Use Case 3: Interactive Documentation
+# Interactive Documentation
 
 * [ChonkOMeter Sample App](https://github.com/Adzz/chonk_o_meter)
 * In the wild: https://github.com/Adzz/data_schema
 
---- 
-# Use Case 4: Visualizing Data
+---
+# Business Intelligence and Analytics
+
+* [Better BI with Livebook](https://fly.io/blog/better-business-intelligence-in-elixir-with-livebook/)
 
 --- 
-# Use Case 5: Introspecting and Interacting with A Running Application
+# Introspecting and Interacting with A Running Application
 
 Instructions for setting this up if your app is on Fly.io: https://fly.io/docs/elixir/advanced-guides/connect-livebook-to-your-app/
-
-Better BI with Livebook - https://fly.io/blog/better-business-intelligence-in-elixir-with-livebook/
 
 
 ---
