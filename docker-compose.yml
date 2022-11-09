@@ -1,0 +1,31 @@
+# Reference: https://medium.com/swlh/use-docker-to-create-an-elixir-phoenix-development-environment-e1a81def1d2e
+
+version: "3"
+
+services:
+  phoenix:
+    build: ./demo_app
+    volumes:
+      - ./demo_app:/app
+    environment:
+      MIX_ENV: dev
+    ports:
+      - "4000:4000"
+    depends_on:
+      - db
+  livebook:
+    image: livebook/livebook
+    volumes:
+      - ./notebooks:/data
+    ports:
+      - "8080:8080"
+      - "8081:8081"
+  db:
+    image: postgres:15-alpine
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres
+      PGDATA: /var/lib/postgresql/data/pgdata
+    restart: always
+    volumes:
+      - ./pgdata:/var/lib/postgresql/data
