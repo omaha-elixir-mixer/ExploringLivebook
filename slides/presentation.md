@@ -4,8 +4,8 @@ theme: default
 ---
 
 # Exploring Livebook
----
 
+---
 # Abby Jones
 
 * Senior software engineer at Mutual of Omaha
@@ -13,15 +13,15 @@ theme: default
   * Word nerd for life
   * Sometimes uses sign language without realizing it
 * Kind of likes dogs
----
 
+---
 # What is Livebook?
 
 * A "tool for creating **interactive** and **collaborative** code notebooks" ([From livebook.dev](https://livebook.dev/#install))
 * An open source Elixir web application built with [Phoenix LiveView](https://www.phoenixframework.org)
 * Sometimes also used to refer to the notebooks themselves, though this is not technically correct and causes confusion
----
 
+---
 # What is a Livebook Notebook?
 
 * "documents that mix text, code, and rich output"
@@ -30,8 +30,8 @@ theme: default
   * [intro_to_livebook.livemd](https://github.com/livebook-dev/livebook/blob/main/lib/livebook/notebook/learn/intro_to_livebook.livemd) from livebook project
   * [booleans.livemd](https://github.com/AbbyJonesDev/beta_curriculum/blob/main/reading/booleans.livemd) from Dockyard Academy curriculum
   * TODO - add link to notebook(s) for this presentation
----
 
+---
 # How Do I Get Started?
 
 * With Fly.io - no credit card required
@@ -43,8 +43,7 @@ theme: default
 _See [full installation details](https://github.com/livebook-dev/livebook#installation) on Github_
 
 ---
-
-# The Nickel Tour
+# First Look at the Livebook Application
 
 https://abby-jones-livebook.fly.dev
 
@@ -56,40 +55,51 @@ https://abby-jones-livebook.fly.dev
 * Settings
 
 ---
-# "Intro to Livebook"
+# "Welcome to Livebook"
 
 * [Markdown file](https://github.com/livebook-dev/livebook/blob/main/lib/livebook/notebook/learn/intro_to_livebook.livemd) in Github vs rendered in Livebook
 * Left navbar tools
-* The basic building blocks - sections, cell types, and extensions
-* REPL plus code editor
-   * Syntax highlighting
-   * Code completion
-   * Documentation
+* Right tool menu
 
 ---
+# Basic Building Blocks
 
-# "Interactive" and "Collaborative" Notebooks
-
-* Chat app
-* Multi-player Pong game
-
-A few highlights to note:
-
-* Importing dependencies
-* Evaluating a cell will also evaluate everything above it
-
-_Not the most practical examples, but a fun look at what's possible!_
+* Sections
+* Markdown cells
+* Code cells
+  * Syntax highlighting
+  * Code completion
+  * Documentation
+* Extensions - Math, Mermaid
 
 ---
+# Power Tools
 
-# Smart Cells
-
-* Dual purpose - demonstrate how to perform common tasks, and automate those tasks to reduce boilerplate code
-* Four types currently provided out of the box - maps, charts, database connections, and SQL queries
-* Notebook showing how to create new smart cells in the "Learn" section
+* Smart Cells
+* Kino
+* VegaLite
 
 ---
+# Use Cases
 
+Basic
+* Experimenting, rapid prototyping, coding along
+* Curriculum development and delivery
+* Code documentation
+
+Advanced
+* Business intelligence and analytics
+* Lightweight admin dashboard
+* Introspect a running application
+
+---
+# Purely for Fun
+
+The "Chat app" and "Multi-player Pong" tutorials highlight some of Livebook's power tools, and it's collaborative capabilities.
+
+To demonstrate - I'll need a volunteer from the audience!
+
+---
 # Use Case 1: Rapid Prototyping and Experimenting
 
 First meeting - Andrew live-coded a function in iex to count the number of times a word appeared in a string
@@ -98,25 +108,26 @@ Here's what it looks like in Livebook, with TDD
 
 And with dbg to investigate along the way
 
+Also a great tool to have up while you're working through a book like _Elixir in Action_
 
 ---
-
 # Use Case 2: Teaching and Curriculum Delivery
 
 Examples:
 
 * [Dockyard Academy](https://github.com/DockYard-Academy/beta_curriculum) - in beta
 * [Elixir Secure Coding Training](https://github.com/podium/elixir-secure-coding)
----
 
+---
 # Use Case 3: Interactive Documentation
 
---- 
+* [ChonkOMeter Sample App](https://github.com/Adzz/chonk_o_meter)
+* In the wild: https://github.com/Adzz/data_schema
 
+--- 
 # Use Case 4: Visualizing Data
 
 --- 
-
 # Use Case 5: Introspecting and Interacting with A Running Application
 
 Instructions for setting this up if your app is on Fly.io: https://fly.io/docs/elixir/advanced-guides/connect-livebook-to-your-app/
@@ -125,17 +136,23 @@ Better BI with Livebook - https://fly.io/blog/better-business-intelligence-in-el
 
 
 ---
-
 # Summary
 
 
 --- 
-
 # Questions?
 
 
 ---
-
 # Thanks!
+
+---
+# Reference
+
+* [Livebook as an Educational Tool](https://dashbit.co/blog/livebook-as-an-educational-tool)
+* [Connecting Livebook to Your App in Production](https://fly.io/docs/elixir/advanced-guides/connect-livebook-to-your-app/)
+* [Livebook for Elixir: Just What the Docs Ordered](https://blog.appsignal.com/2022/05/24/livebook-for-elixir-just-what-the-docs-ordered.html)
+* [How to query and visualize data from Amazon Athena using Livebook](https://news.livebook.dev/how-to-query-and-visualize-data-from-amazon-athena-using-livebook-4dfQ5y)
+* [How to query and visualize data from Google BigQuery using Livebook](https://news.livebook.dev/how-to-query-and-visualize-data-from-google-bigquery-using-livebook-3o2leU)
 
 

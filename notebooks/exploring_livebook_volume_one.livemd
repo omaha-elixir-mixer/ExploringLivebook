@@ -1,0 +1,157 @@
+# Exploring Livebook - Volume 1
+
+```elixir
+Mix.install([
+  {:kino, "~> 0.7.0"},
+  {:vega_lite, "~> 0.1.4"},
+  {:kino_vega_lite, "~> 0.1.1"}
+])
+```
+
+## Markdown Cells
+
+So this is a markdown cell.  It's the most basic of all the building blocks.  You can use a Markdown cell to do all the things you'd normally do in Markdown....
+
+Say things **boldly**, or with a more subtle _emphasis_.
+
+Create a table
+
+| Name   | Age | Breed               |
+| ------ | --- | ------------------- |
+| Maisie | 3   | Australian Shepherd |
+| Chase  | 4   | Goldendoodle        |
+| Grace  | 15  | Shiba Inu           |
+
+Link to some great external content, like the [Shaped by Dog Podcast](https://dogsthat.com/podcasts/).
+
+Or link to other Livebook notebooks in the same directory: [welcome_to_livebook.livemd](welcome_to_livebook.livemd)
+
+One of the cool things about Markdown cells is that you can see a live preview of the rendered output in real time as you type. **Don't let me forget** to switch into "edit" mode and show what this looks like!
+
+## Code Cells
+
+```elixir
+# This is a code cell.  You can write any Elixir code in here.
+
+text = "Now is the time for all good dogs to come to the aid of the ball."
+```
+
+```elixir
+# This is another code cell.  
+# Each code cell will have access to anything that was defined in a previous cell
+
+IO.puts(text)
+```
+
+At the first Omaha Elixir Mixer meetup, Andrew Ek live-coded a function that would take in a string and return a map that showed how many times each word appeared in the text.  He did this in iex, and he did a fantastic job.
+
+I thought it might be cool to see if I could replicate that experiment here in Livebook.  I feel like a cheater, though.  I was exploring Livebook's code completion features and discovered there's a built-in function in the Enum module that does the job.
+
+```elixir
+text
+|> String.split()
+
+# |> Enum.
+```
+
+Ok, that was a little overly simplified.  Andrew's solution was more robust than that.  So I kept going and used the new `dbg` function that shipped in Elixir 1.14 to help me build up the steps.  The output from the `dbg` function is even cooler with Kino installed.  (But more on Kino later - I'm getting ahead of myself.)
+
+```elixir
+text
+|> String.upcase()
+|> String.split()
+|> Enum.map(fn word -> String.replace(word, ~r/\W/, "") end)
+|> Enum.frequencies()
+|> dbg()
+```
+
+**Note to Self**
+
+It took me a few tries to remember the syntax for the regex sigil.  I opened a new tab and Googled, as one does, completely forgetting that I could have hovered over the `~r`in my code block and seen some tips right here, with a link to view all the details in Hexdocs.
+
+```elixir
+# Taking our example just one step further - we can organize code into modules here too
+
+defmodule TextUtil do
+  def get_word_count(text) do
+    text
+    |> String.upcase()
+    |> String.split()
+    |> Enum.map(fn word -> String.replace(word, ~r/\W/, "") end)
+    |> Enum.frequencies()
+  end
+end
+
+longer_text = """
+How is everybody doing?  Are we having fun yet? This concludes our
+look at the basic building blocks.  Up next, we will explore some
+of the more advanced tools, and then start putting all the pieces 
+together to look at some real-world use cases.
+"""
+
+TextUtil.get_word_count(longer_text)
+```
+
+## Diagrams
+
+Support for [Mermaid diagrams](https://mermaid-js.github.io/mermaid) is also supported out of the box. I had no idea Mermaid supported so many different kinds of diagrams.
+
+```mermaid
+    journey
+        title My day
+        section Get ready for work
+          Make coffee: 5: Me
+          Eat breakfast: 4: Me, Maisie, Chase, Grace
+          Go outside: 3: Me, Maisie, Chase, Grace
+        section Start Work
+          Go to office: 3: Me, Maisie, Chase
+          Do work: 4: Me
+        section End of work
+          Eat dinner: 5: Me, Maisie, Chase, Grace
+
+```
+
+## Smart Cells
+
+Smart cells are a new feature that were added to Livebook in v0.6.  They serve multiple purposes:
+
+* demonstrating how to perform common tasks
+* automating the generation of boilerplate code for performing common tasks
+* enabling less technical users to perform tasks without writing code
+
+Livebook ships with smart cells for connecting to several common databases and running queries.  Other libraries like VegaLite include additional smart cells.  There is even a notebook included in the "Learn" section that walks through how to create your own smart cell.
+
+## Kino
+
+Kino provides interactive widgets that do lots of useful things.  It doesn't ship with Livebook, but it can be added as a dependency in the `Setup` block at the top of the page.  Check out the Learn section for a series of in-depth tutorials.  We will just scratch the surface here.
+
+We can use a Kino Input to create a form element on the page and collect user input.
+
+```elixir
+favorite_breed = Kino.Input.text("Favorite dog breed")
+```
+
+And then we can use that captured input later on...
+
+```elixir
+IO.puts("I agree - the #{Kino.Input.read(favorite_breed)} is pretty great.")
+```
+
+Kino can also render data tables.  This example will gather information about the processes currently running in this application and display them in an table.  (Credit goes to the Intro to Kino notebook for this code.)
+
+The table has pagination and can be sorted on any column heading.
+
+```elixir
+keys = [:registered_name, :reductions, :stack_size]
+
+processes =
+  for pid <- Process.list(),
+      info = Process.info(pid, keys),
+      do: info
+
+Kino.DataTable.new(processes)
+```
+
+## VegaLite
+
+VegaLite is a library that provides capabilities for creating all kinds of different charts and graphs.  When added to Livebook, it also makes a new type of SmartCell available for creating charts.
