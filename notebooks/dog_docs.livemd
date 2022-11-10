@@ -1,0 +1,85 @@
+<!-- vim: syntax=markdown -->
+
+# DemoApp.Dogs
+
+## Section
+
+The Dogs context.
+
+## change_breed/2
+
+Returns an `%Ecto.Changeset{}` for tracking breed changes.
+
+## Examples
+
+```elixir
+change_breed(breed)
+```
+
+## create_breed/1
+
+Creates a breed.
+
+## Examples
+
+```elixir
+create_breed(%{field: value})
+```
+
+```elixir
+create_breed(%{field: bad_value})
+```
+
+## delete_breed/1
+
+Deletes a breed.
+
+## Examples
+
+```elixir
+delete_breed(breed)
+```
+
+```elixir
+delete_breed(breed)
+```
+
+## get_breed!/1
+
+Gets a single breed.
+
+Raises `Ecto.NoResultsError` if the Breed does not exist.
+
+## Examples
+
+```elixir
+get_breed!(123)
+```
+
+```elixir
+get_breed!(456)
+```
+
+## list_breeds/0
+
+Returns the list of breeds.
+
+## Examples
+
+```elixir
+list_breeds()
+```
+
+## update_breed/2
+
+Updates a breed.
+
+## Examples
+
+```elixir
+update_breed(breed, %{field: new_value})
+```
+
+```elixir
+update_breed(breed, %{field: bad_value})
+```

@@ -1,0 +1,111 @@
+# Exploring Livebook - Volume 2
+
+```elixir
+demo_app_root = Path.join(__DIR__, "../demo_app")
+
+Mix.install(
+  [
+    {:demo_app, path: demo_app_root, env: :dev},
+    {:kino, "~> 0.7.0"},
+    {:vega_lite, "~> 0.1.4"},
+    {:kino_vega_lite, "~> 0.1.1"},
+    {:kino_db, "~> 0.2.0"},
+    {:postgrex, "~> 0.16.3"}
+  ],
+  config_path: Path.join(demo_app_root, "config/config.exs"),
+  lockfile: Path.join(demo_app_root, "mix.lock")
+)
+```
+
+## Interacting with the Demo App
+
+In the Setup block for this notebook, we're including the local copy of our application and pointing to the dev config file and the lockfile. We can also include our other Livebook-specific libraries like Kino and VegaLite.
+
+At this point - we have all the tools available in Livebook, and we also have direct access to our application running locally.  We even get code completion.
+
+```elixir
+DemoApp.Dogs.list_breeds()
+|> Kino.DataTable.new()
+```
+
+### Add a New Breed
+
+Using Kino controls, we can create a form for adding a new breed to our database.
+
+```elixir
+form =
+  Kino.Control.form(
+    [
+      name: Kino.Input.text("Name"),
+      group: Kino.Input.text("Group"),
+      origin: Kino.Input.text("Origin"),
+      size: Kino.Input.text("Size")
+    ],
+    submit: "Create"
+  )
+```
+
+```elixir
+Kino.Control.subscribe(form, :add_breed)
+
+receive do
+  {:add_breed, %{data: details}} ->
+    IO.inspect(details)
+
+    {:ok, new_breed} =
+      DemoApp.Dogs.create_breed(%{
+        name: details.name,
+        group: details.group,
+        origin: details.origin,
+        size: details.size
+      })
+
+    new_breed
+after
+  5000 ->
+    IO.puts("No message")
+end
+```
+
+## Introspecting the Demo App
+
+In addition to interacting with our application code, we can also peek behind the curtain to see how are application is laid out and investigate the different processes that are running.
+
+We used a Kino DataTable to look at the processes running in Livebook itself.  Here we can use it to look at the processes running in the Demo App as well.
+
+```elixir
+keys = [:registered_name, :reductions, :stack_size]
+
+processes =
+  for pid <- Process.list(),
+      info = Process.info(pid, keys),
+      do: info
+
+Kino.DataTable.new(processes)
+```
+
+We can render out a diagrams of the application as a whole or of specific sections of the supervision tree.
+
+```elixir
+Kino.Process.render_app_tree(:demo_app)
+```
+
+```elixir
+Kino.Process.render_sup_tree(DemoApp.Supervisor)
+```
+
+We can even hone in on specific functions and get a visual look at the processes involved and how messages are being passed.
+
+```elixir
+Kino.Process.render_seq_trace(fn ->
+  DemoApp.Dogs.list_breeds()
+end)
+```
+
+## Automatically Generated Documentation
+
+I tried using the [livebook helpers library](https://github.com/Adzz/livebook_helpers) to generate documentation for the Dogs context module.  I did the very bare minimum and didn't follow all the directions in the [blog post](https://blog.appsignal.com/2022/05/24/livebook-for-elixir-just-what-the-docs-ordered.html), so the results are probably not what they could be.
+
+Still - it's not a bad start.  The helpers used the existing module docs to create a nice outline that wouldn't be too hard to flesh out.
+
+The results are in the [dog_docs.livemd](dog_docs.livemd) notebook.

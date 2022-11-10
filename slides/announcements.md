@@ -10,18 +10,29 @@ Exploring Livebook
 November 10, 2022
 
 ---
-## Sponsors
+## Thanks to Our Sponsors!
 
-* DMSI - venue
-* LaunchScout - food
-* ForeFront17 - Meetup fees
+* [DMSi](https://www.dmsi.com) - venue and beverages
+* [LaunchScout](https://launchscout.com) - food
+* [ForeFront17](https://www.facebook.com/ForeFront17/) - Meetup fees
 
 ---
-## Github Organization
+## Tech Omaha Party
 
-Code of Conduct
+Thursday, December 1st
 
-Repo for tonight's presentation
+5:00-9:00pm
+
+The Slowdown
+
+[Sign up on Eventbrite](https://www.eventbrite.com/e/tech-omaha-party-winter-2022-tickets-440112507357)
+
+---
+## Omaha Elixir Mixer on Github
+
+https://github.com/omaha-elixir-mixer
+
+Repo for tonight's presentation including all slides and code is up now.  More to come!
 
 ---
 ## Discord Server
