@@ -21,7 +21,12 @@ defmodule DemoApp.DogsTest do
     end
 
     test "create_breed/1 with valid data creates a breed" do
-      valid_attrs = %{group: "some group", name: "some name", origin: "some origin", size: "some size"}
+      valid_attrs = %{
+        group: "some group",
+        name: "some name",
+        origin: "some origin",
+        size: "some size"
+      }
 
       assert {:ok, %Breed{} = breed} = Dogs.create_breed(valid_attrs)
       assert breed.group == "some group"
@@ -36,7 +41,13 @@ defmodule DemoApp.DogsTest do
 
     test "update_breed/2 with valid data updates the breed" do
       breed = breed_fixture()
-      update_attrs = %{group: "some updated group", name: "some updated name", origin: "some updated origin", size: "some updated size"}
+
+      update_attrs = %{
+        group: "some updated group",
+        name: "some updated name",
+        origin: "some updated origin",
+        size: "some updated size"
+      }
 
       assert {:ok, %Breed{} = breed} = Dogs.update_breed(breed, update_attrs)
       assert breed.group == "some updated group"

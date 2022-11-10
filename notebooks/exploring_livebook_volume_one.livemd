@@ -234,3 +234,7 @@ VegaLite.new(width: 400, height: 400, title: "Breed Group by Region")
 |> VegaLite.encode(:y, aggregate: :count)
 |> VegaLite.encode_field(:color, "origin", type: :nominal)
 ```
+
+## But Wait - There's More
+
+In [Exploring Livebook - Volume 2](exploring_livebook_volume_two.livemd), We'll look at ways to use Livebook for interacting directly with the Demo App itself.
